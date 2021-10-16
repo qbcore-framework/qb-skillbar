@@ -1,6 +1,13 @@
 # qb-skillbar
 Skill Bar For QB-Core
 
+# Example
+local duration = math.random(2000, 5000)
+local pos = math.random(10, 30)
+local width = math.random(10, 20)
+    
+local success = exports['qb-skillbar']:StartSkillbar(duration, pos, width)
+
 # License
 
     QBCore Framework
