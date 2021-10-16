@@ -1,7 +1,12 @@
+var POS
+var WIDTH
+
 $(document).ready(function(){
     Skillbar = {};
 
     Skillbar.Start = function(data) {
+        POS = data.pos
+        WIDTH = data.width
         $(".bar-check").css({"right": data.pos + "%"});
         $(".bar-check").css({"width": data.width + "%"});
         $(".bar-container").fadeIn('fast', function() {
@@ -34,12 +39,14 @@ $(document).ready(function(){
         $(".bar-container").fadeOut('fast', function() {
             $(".bar-total").css("width", 0);
         })
+        POS = null
+        WIDTH = null
     }
 
-    Skillbar.Check = function(data) {
+    Skillbar.Check = function() {
         var Percentage = (($(".bar-total").width() / $(".bar-container").width()) * 100);
-        var Check = 100 - data.data.pos
-        var Minimum = Check - (data.data.width)
+        var Check = 100 - POS
+        var Minimum = Check - WIDTH
 
         $(".bar-total").stop();
         if (Percentage + 2 >= Minimum && Percentage - 2 <= Check) {
@@ -73,9 +80,13 @@ $(document).ready(function(){
             case "stop":
                 Skillbar.Stop();
                 break;
-            case "check":
-                Skillbar.Check(event.data);
-                break;
         }
     });
+
+    document.onkeydown = function (data) {
+        let key_pressed = data.code;
+        if (key_pressed == 'KeyE') {
+            Skillbar.Check()
+        }
+    };
 });

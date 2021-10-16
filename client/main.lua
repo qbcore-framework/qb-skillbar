@@ -12,22 +12,10 @@ RegisterNUICallback('Check', function(data, cb)
     SendNUIMessage({
         action = "stop"
     })
+    SetNuiFocus(false, false)
+    SetNuiFocusKeepInput(false)
     result = data.success
 end)
-
-function TriggerCheck()
-    Citizen.CreateThread(function()
-        while Skillbar.Data.Active do
-            if IsControlJustPressed(0, 38) then
-                SendNUIMessage({
-                    action = "check",
-                    data = Skillbar.Data.Data,
-                })
-            end
-            Citizen.Wait(1)
-        end
-    end)
-end
 
 function StartSkillbar(duration, pos, width, callback)
     if not Skillbar.Data.Active then
@@ -36,18 +24,18 @@ function StartSkillbar(duration, pos, width, callback)
 
         Skillbar.Data.Data = {duration = duration, pos = pos, width = width}
 
-        TriggerCheck()
-
         SendNUIMessage({
             action = "start",
             duration = duration,
             pos = pos,
             width = width,
         })
+        SetNuiFocus(true, false)
+        SetNuiFocusKeepInput(true)
         TriggerEvent('progressbar:client:ToggleBusyness', true)
 
         while Skillbar.Data.Active do
-            Citizen.Wait(5)
+            Citizen.Wait(100)
         end
         Citizen.Wait(100)
         return result
