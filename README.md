@@ -10,6 +10,12 @@ local pos = math.random(10, 30)
 local width = math.random(10, 20)
     
 local success = exports['qb-skillbar']:StartSkillbar(duration, pos, width)
+
+if success then
+        -- Passed
+else
+        -- Failed
+end
 ```
 
 # License
