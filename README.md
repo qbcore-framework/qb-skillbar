@@ -2,6 +2,7 @@
 Skill Bar For QB-Core
 
 # Example
+```lua
 local duration = math.random(2000, 5000)
 
 local pos = math.random(10, 30)
@@ -9,6 +10,7 @@ local pos = math.random(10, 30)
 local width = math.random(10, 20)
     
 local success = exports['qb-skillbar']:StartSkillbar(duration, pos, width)
+```
 
 # License
 
