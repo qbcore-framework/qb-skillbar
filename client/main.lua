@@ -64,6 +64,7 @@ Skillbar.Repeat = function(data)
 end
 
 CreateThread(function()
+    local loop = 1000
     while true do
         if Skillbar.Data.Active then
             if IsControlJustPressed(0, 38) then
@@ -72,8 +73,11 @@ CreateThread(function()
                     data = Skillbar.Data.Data,
                 })
             end
+            loop = 0
+        else
+            loop = 1000
         end
-        Wait(1)
+        Wait(loop)
     end
 end)
 
