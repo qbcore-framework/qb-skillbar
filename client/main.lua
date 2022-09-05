@@ -71,20 +71,22 @@ Skillbar.Repeat = function(data)
 end
 
 function BarLoop()
-    while true do
-        if Skillbar.Data.Active then
-            if IsControlJustPressed(0, 38) then
-                SendNUIMessage({
-                    action = "check",
-                    data = Skillbar.Data.Data,
-                })
+    CreateThread(function()
+        while true do
+            if Skillbar.Data.Active then
+                if IsControlJustPressed(0, 38) then
+                    SendNUIMessage({
+                        action = "check",
+                        data = Skillbar.Data.Data,
+                     })
+                end
+            else
+                looped = false
+                break
             end
-        else
-            looped = false
-            break
         end
         Wait(1)
-    end
+    end)
 end
 
 function GetSkillbarObject()
