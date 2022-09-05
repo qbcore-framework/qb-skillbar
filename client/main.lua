@@ -8,6 +8,7 @@ Skillbar.Data = {
 }
 successCb = nil
 failCb = nil
+local looped = false
 
 -- NUI Callback's
 
@@ -30,6 +31,10 @@ end)
 Skillbar.Start = function(data, success, fail)
     if not Skillbar.Data.Active then
         Skillbar.Data.Active = true
+        if not looped then
+            looped = true
+            BarLoop()
+        end
         if success ~= nil then
             successCb = success
         end
@@ -52,8 +57,9 @@ end
 
 Skillbar.Repeat = function(data)
     Skillbar.Data.Active = true
+    BarLoop()
     Skillbar.Data.Data = data
-    Citizen.CreateThread(function()
+    CreateThread(function()
         Wait(500)
         SendNUIMessage({
             action = "start",
@@ -64,7 +70,7 @@ Skillbar.Repeat = function(data)
     end)
 end
 
-CreateThread(function()
+function BarLoop()
     while true do
         if Skillbar.Data.Active then
             if IsControlJustPressed(0, 38) then
@@ -73,10 +79,13 @@ CreateThread(function()
                     data = Skillbar.Data.Data,
                 })
             end
+        else
+            looped = false
+            break
         end
         Wait(1)
     end
-end)
+end
 
 function GetSkillbarObject()
     return Skillbar
