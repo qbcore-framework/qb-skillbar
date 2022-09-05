@@ -86,7 +86,7 @@ function BarLoop()
             else
                 looped = false
                 break
-            end            
+            end
         Wait(1)
         end
     end)
