@@ -57,7 +57,10 @@ end
 
 Skillbar.Repeat = function(data)
     Skillbar.Data.Active = true
-    BarLoop()
+    if not looped then
+        looped = true
+        BarLoop()
+    end
     Skillbar.Data.Data = data
     CreateThread(function()
         Wait(500)
