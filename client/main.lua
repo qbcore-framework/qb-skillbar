@@ -68,17 +68,12 @@ function BarLoop()
     if not Skillbar.Data.Active then
         Skillbar.Data.Active = true
         CreateThread(function()
-            while true do
-                if Skillbar.Data.Active then
-                    if IsControlJustPressed(0, 38) then
-                        SendNUIMessage({
-                            action = "check",
-                            data = Skillbar.Data.Data,
-                         })
-                    end
-                else
-                    looped = false
-                    break
+            while Skillbar.Data.Active do
+                if IsControlJustPressed(0, 38) then
+                    SendNUIMessage({
+                        action = "check",
+                        data = Skillbar.Data.Data,
+                    })
                 end
             Wait(1)
             end
