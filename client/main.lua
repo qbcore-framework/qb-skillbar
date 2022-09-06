@@ -8,7 +8,6 @@ Skillbar.Data = {
 }
 successCb = nil
 failCb = nil
-local looped = false
 
 -- NUI Callback's
 
