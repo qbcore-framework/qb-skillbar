@@ -75,7 +75,7 @@ function BarLoop()
                         data = Skillbar.Data.Data,
                     })
                 end
-            Wait(1)
+                Wait(1)
             end
         end)
     end
