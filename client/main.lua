@@ -30,11 +30,7 @@ end)
 
 Skillbar.Start = function(data, success, fail)
     if not Skillbar.Data.Active then
-        Skillbar.Data.Active = true
-        if not looped then
-            looped = true
-            BarLoop()
-        end
+        BarLoop()
         if success ~= nil then
             successCb = success
         end
@@ -56,11 +52,7 @@ Skillbar.Start = function(data, success, fail)
 end
 
 Skillbar.Repeat = function(data)
-    Skillbar.Data.Active = true
-    if not looped then
-        looped = true
-        BarLoop()
-    end
+    BarLoop()
     Skillbar.Data.Data = data
     CreateThread(function()
         Wait(500)
@@ -74,22 +66,25 @@ Skillbar.Repeat = function(data)
 end
 
 function BarLoop()
-    CreateThread(function()
-        while true do
-            if Skillbar.Data.Active then
-                if IsControlJustPressed(0, 38) then
-                    SendNUIMessage({
-                        action = "check",
-                        data = Skillbar.Data.Data,
-                     })
+    if not Skillbar.Data.Active then
+        Skillbar.Data.Active = true
+        CreateThread(function()
+            while true do
+                if Skillbar.Data.Active then
+                    if IsControlJustPressed(0, 38) then
+                        SendNUIMessage({
+                            action = "check",
+                            data = Skillbar.Data.Data,
+                         })
+                    end
+                else
+                    looped = false
+                    break
                 end
-            else
-                looped = false
-                break
+            Wait(1)
             end
-        Wait(1)
-        end
-    end)
+        end)
+    end
 end
 
 function GetSkillbarObject()
