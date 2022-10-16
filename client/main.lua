@@ -74,6 +74,7 @@ function BarLoop()
                         action = "check",
                         data = Skillbar.Data.Data,
                     })
+                    break
                 end
                 Wait(1)
             end
