@@ -12,7 +12,6 @@ files {
     'html/index.html',
     'html/script.js',
     'html/style.css',
-    'html/VerdanaBold.ttf'
 }
 
 dependencies {
