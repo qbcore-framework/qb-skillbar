@@ -5,6 +5,7 @@ Skillbar.Data = {}
 Skillbar.Data = {
     Active = false,
     Data = {},
+    Completed = 0,
 }
 successCb = nil
 failCb = nil
@@ -16,7 +17,13 @@ RegisterNUICallback('Check', function(data, cb)
         Skillbar.Data.Active = false
         TriggerEvent('progressbar:client:ToggleBusyness', false)
         if data.success then
-            successCb()
+            Skillbar.Data.Completed = Skillbar.Data.Completed + 1
+            if Skillbar.Data.Completed >= Skillbar.Data.Data.amount then
+                Skillbar.Data.Completed = 0
+                successCb()
+            else
+                Skillbar.Repeat(Skillbar.Data.Data)
+            end
         else
             failCb()
             SendNUIMessage({
@@ -37,6 +44,7 @@ Skillbar.Start = function(data, success, fail)
             failCb = fail
         end
         Skillbar.Data.Data = data
+        Skillbar.Data.Completed = 0
 
         SendNUIMessage({
             action = "start",
@@ -46,7 +54,7 @@ Skillbar.Start = function(data, success, fail)
         })
         TriggerEvent('progressbar:client:ToggleBusyness', true)
     else
-        QBCore.Functions.Notify('Your already doing something..', 'error')
+        QBCore.Functions.Notify('You are already doing something..', 'error')
     end
 end
 
