@@ -44,7 +44,7 @@ Skillbar.Start = function(data, success, fail)
             failCb = fail
         end
         Skillbar.Data.Data = data
-        Skillbar.Data.Data.amount = data.amount or 1 -- Set a default value of 1 if 'amount' is not provided
+        Skillbar.Data.Data.amount = data.amount or 1
         Skillbar.Data.Completed = 0
 
         SendNUIMessage({
