@@ -12,11 +12,8 @@ files {
     'html/index.html',
     'html/script.js',
     'html/style.css',
-    'html/VerdanaBold.ttf'
 }
 
-dependencies {
-    'qb-core'
-}
+dependency 'qb-core'
 
 lua54 'yes'
