@@ -15,9 +15,9 @@ body {
     margin: 0 auto;
     left: 0;
     right: 0;
-    height: 0.3vh;
-    width: 27.5vh;
-    background-color: rgba(23, 23, 23, 90%);
+    height: 0.5vh;
+    width: 30vh;
+    background-color: rgba(125, 125, 125, 0.9);
     bottom: 12vh;
     border-radius: .5vh;
     box-shadow: 0rem 0rem 0.1rem 0.05rem #000000;
@@ -57,7 +57,7 @@ body {
     bottom: 13vh;
 }
 
-.bar-label > span {
+.bar-label>span {
     line-height: 4.3vh;
     color: #dc143c;
     font-size: 3.6vh;
